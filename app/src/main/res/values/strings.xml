@@ -1,0 +1,7 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="app_name" translatable="false">CepespApp</string>
+    <string name="search_input_place_holder">Pesquisar</string>
+    <string name="search_by_name">Nome Candidato</string>
+    <string name="search_by_urn_name">Nome Urna</string>
+    <string name="votes"><xliff:g name="votes">%d</xliff:g> de votos</string>
+</resources>
