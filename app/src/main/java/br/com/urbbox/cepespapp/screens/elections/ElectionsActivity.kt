@@ -16,6 +16,11 @@ class ElectionsActivity : AppCompatActivity(), IElectionsView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_elections)
 
+        supportActionBar?.apply {
+            setHomeButtonEnabled(true)
+            setDisplayHomeAsUpEnabled(true)
+        }
+
         val candidate = intent.getParcelableExtra<DimCandidate>("candidate")
 
         electionsRecyclerView.layoutManager = LinearLayoutManager(this)
@@ -23,6 +28,11 @@ class ElectionsActivity : AppCompatActivity(), IElectionsView {
         title = candidate.name
         presenter = ElectionsPresenter(this)
         presenter.loadElections(candidate)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return super.onSupportNavigateUp()
     }
 
     override fun showElections(candidates: List<Candidate>) {
