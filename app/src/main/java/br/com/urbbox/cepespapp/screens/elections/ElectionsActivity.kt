@@ -3,6 +3,7 @@ package br.com.urbbox.cepespapp.screens.elections
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import android.view.View
 import br.com.urbbox.cepespapp.R
 import br.com.urbbox.cepespapp.data.Candidate
 import br.com.urbbox.cepespapp.data.DimCandidate
@@ -21,21 +22,32 @@ class ElectionsActivity : AppCompatActivity(), IElectionsView {
             setDisplayHomeAsUpEnabled(true)
         }
 
-        val candidate = intent.getParcelableExtra<DimCandidate>("candidate")
-
         electionsRecyclerView.layoutManager = LinearLayoutManager(this)
 
-        title = candidate.name
         presenter = ElectionsPresenter(this)
-        presenter.loadElections(candidate)
+        presenter.loadElections(intent.getParcelableExtra("candidate"))
     }
 
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
-        return super.onSupportNavigateUp()
+        return true
+    }
+
+    override fun setTitle(name: String) {
+        title = name
     }
 
     override fun showElections(candidates: List<Candidate>) {
         electionsRecyclerView.adapter = ElectionsAdapter(this, candidates)
+    }
+
+    override fun showProgressBar() {
+        progressBar2.visibility = View.VISIBLE
+        electionsRecyclerView.visibility = View.GONE
+    }
+
+    override fun hideProgressBar() {
+        progressBar2.visibility = View.GONE
+        electionsRecyclerView.visibility = View.VISIBLE
     }
 }

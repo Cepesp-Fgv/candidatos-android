@@ -5,6 +5,7 @@ import android.os.Build
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import android.view.View
 import kotlinx.android.synthetic.main.activity_search.*
 import org.jetbrains.anko.sdk25.coroutines.onClick
 import android.view.inputmethod.InputMethodManager
@@ -46,4 +47,13 @@ class SearchActivity : AppCompatActivity(), ISearchView {
         imm.hideSoftInputFromWindow(currentFocus.windowToken, 0)
     }
 
+    override fun hideProgressBar() {
+        candidatesRecyclerView.visibility = View.VISIBLE
+        progressBar.visibility = View.GONE
+    }
+
+    override fun showProgressBar() {
+        candidatesRecyclerView.visibility = View.GONE
+        progressBar.visibility = View.VISIBLE
+    }
 }

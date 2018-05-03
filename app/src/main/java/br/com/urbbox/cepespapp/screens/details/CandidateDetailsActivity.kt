@@ -6,7 +6,6 @@ import android.support.v7.app.ActionBar
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View.GONE
 import br.com.urbbox.cepespapp.R
-import br.com.urbbox.cepespapp.data.Candidate
 import kotlinx.android.synthetic.main.activity_candidate_details.*
 
 class CandidateDetailsActivity : AppCompatActivity(), ICandidateDetailsView {
@@ -22,17 +21,15 @@ class CandidateDetailsActivity : AppCompatActivity(), ICandidateDetailsView {
             setDisplayHomeAsUpEnabled(true)
         }
 
-        val candidate = intent.getParcelableExtra<Candidate>("candidate")
-
         candidateDetailsRecyclerView.layoutManager = LinearLayoutManager(this)
 
         presenter = CandidateDetailsPresenter(this)
-        presenter.fill(candidate)
+        presenter.fill(intent.getParcelableExtra("candidate"))
     }
 
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
-        return super.onSupportNavigateUp()
+        return true
     }
 
     override fun setTitle(electionYear: String) {

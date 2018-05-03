@@ -12,10 +12,13 @@ class ElectionsPresenter(view: IElectionsView) : BasePresenter<IElectionsView>(v
     private val client = CepespAppService()
 
     fun loadElections(candidate: DimCandidate) {
+        view.setTitle(candidate.name)
+        view.showProgressBar()
         launch(CommonPool) {
             val candidates = client.getElections(candidate.electoralID)
 
             launch(UI) {
+                view.hideProgressBar()
                 view.showElections(candidates)
             }
         }

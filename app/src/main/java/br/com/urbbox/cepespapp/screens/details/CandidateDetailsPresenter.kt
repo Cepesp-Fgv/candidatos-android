@@ -11,15 +11,20 @@ class CandidateDetailsPresenter(view: ICandidateDetailsView) : BasePresenter<ICa
     private val exclude = arrayOf("id", "totalVotes", "ballotName")
 
     fun fill(candidate: Candidate) {
-        val info = getCandidateInfo(candidate).filter { it.key !in exclude }.map { it.key to it.value }
+        val info = getCandidateInfo(candidate)
+
         view.setExtraInfo(info)
         view.setTitle(candidate.electionYear)
         view.setBallotName(candidate.ballotName)
         view.setTotalVotes(candidate.totalVotes)
     }
 
-    private fun getCandidateInfo(candidate: Candidate): Map<String, String?> {
+    private fun getCandidateInfo(candidate: Candidate): List<Pair<String, String?>> {
         val serialized = serialize(candidate)
-        return deserialize(serialized, object : TypeToken<Map<String, String?>>() {}.type)
+        val map: Map<String, String?> = deserialize(serialized, object : TypeToken<Map<String, String?>>() {}.type)
+
+        return map
+                .filter { it.key !in exclude }
+                .map { it.key.replace('_', ' ') to it.value }
     }
 }

@@ -4,4 +4,6 @@ import br.com.urbbox.cepespapp.data.DimCandidate
 
 interface ISearchView {
     fun showCandidates(results: List<DimCandidate>)
+    fun hideProgressBar()
+    fun showProgressBar()
 }
