@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Build
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.design.widget.TabLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import kotlinx.android.synthetic.main.activity_search.*
@@ -13,7 +14,7 @@ import br.com.urbbox.cepespapp.R
 import br.com.urbbox.cepespapp.data.DimCandidate
 
 
-class SearchActivity : AppCompatActivity(), ISearchView {
+class SearchActivity : AppCompatActivity(), ISearchView, TabLayout.OnTabSelectedListener {
 
     private lateinit var presenter: SearchPresenter
 
@@ -28,13 +29,26 @@ class SearchActivity : AppCompatActivity(), ISearchView {
             searchInput.isFocusedByDefault = true
         }
 
-        searchByName.onClick {
-            presenter.onSearch(searchInput.text.toString(), null)
-        }
+        searchByTab.addOnTabSelectedListener(this)
+    }
 
-        searchByUrnName.onClick {
+    override fun onTabReselected(tab: TabLayout.Tab?) {
+        onClickSearch(tab)
+    }
+
+    override fun onTabUnselected(tab: TabLayout.Tab?) {
+        //Do nothing
+    }
+
+    override fun onTabSelected(tab: TabLayout.Tab?) {
+        onClickSearch(tab)
+    }
+
+    private fun onClickSearch(tab: TabLayout.Tab?) {
+        if (tab?.position == 0)
+            presenter.onSearch(searchInput.text.toString(), null)
+        else
             presenter.onSearch(null, searchInput.text.toString())
-        }
     }
 
     override fun showCandidates(results: List<DimCandidate>) {

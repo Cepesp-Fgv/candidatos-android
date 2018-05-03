@@ -22,26 +22,23 @@
             android:hint="@string/search_input_place_holder"
             android:inputType="textPersonName" />
 
-        <LinearLayout
+        <android.support.design.widget.TabLayout
+            android:id="@+id/searchByTab"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:layout_height="match_parent">
 
-            <Button
-                android:id="@+id/searchByName"
+            <android.support.design.widget.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:text="@string/search_by_name" />
 
-            <Button
-                android:id="@+id/searchByUrnName"
+            <android.support.design.widget.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:text="@string/search_by_urn_name" />
 
-        </LinearLayout>
+        </android.support.design.widget.TabLayout>
+
     </LinearLayout>
 
 

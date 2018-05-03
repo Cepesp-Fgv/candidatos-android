@@ -14,6 +14,9 @@ class CepespAppService {
     private val client = api(CepespAppApi::class.java)
 
     suspend fun searchCandidate(candidateName: String?, ballotName: String?): List<DimCandidate> {
+        if (candidateName.isNullOrEmpty() && ballotName.isNullOrEmpty())
+            return emptyList()
+
         return getList(client.searchCandidate(candidateName, ballotName))
     }
 
