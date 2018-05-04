@@ -6,15 +6,19 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.support.v7.widget.LinearLayoutManager
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import kotlinx.android.synthetic.main.activity_search.*
 import org.jetbrains.anko.sdk25.coroutines.onClick
 import android.view.inputmethod.InputMethodManager
 import br.com.urbbox.cepespapp.R
 import br.com.urbbox.cepespapp.data.DimCandidate
+import com.mancj.materialsearchbar.MaterialSearchBar
 
 
-class SearchActivity : AppCompatActivity(), ISearchView, TabLayout.OnTabSelectedListener {
+class SearchActivity : AppCompatActivity(), ISearchView, TabLayout.OnTabSelectedListener, MaterialSearchBar.OnSearchActionListener {
+
 
     private lateinit var presenter: SearchPresenter
 
@@ -30,10 +34,23 @@ class SearchActivity : AppCompatActivity(), ISearchView, TabLayout.OnTabSelected
         }
 
         searchByTab.addOnTabSelectedListener(this)
+        searchInput.setOnSearchActionListener(this)
+    }
+
+    override fun onButtonClicked(buttonCode: Int) {
+        //Do nothing
+    }
+
+    override fun onSearchStateChanged(enabled: Boolean) {
+        //Do nothing
+    }
+
+    override fun onSearchConfirmed(text: CharSequence?) {
+        onSearch()
     }
 
     override fun onTabReselected(tab: TabLayout.Tab?) {
-        onClickSearch(tab)
+        //Do nothing
     }
 
     override fun onTabUnselected(tab: TabLayout.Tab?) {
@@ -41,19 +58,18 @@ class SearchActivity : AppCompatActivity(), ISearchView, TabLayout.OnTabSelected
     }
 
     override fun onTabSelected(tab: TabLayout.Tab?) {
-        onClickSearch(tab)
+        onSearch()
     }
 
-    private fun onClickSearch(tab: TabLayout.Tab?) {
-        if (tab?.position == 0)
-            presenter.onSearch(searchInput.text.toString(), null)
-        else
-            presenter.onSearch(null, searchInput.text.toString())
+    private fun onSearch() {
+        when (searchByTab.selectedTabPosition) {
+            0 -> presenter.onSearchByName(searchInput.text)
+            else -> presenter.onSearchByBallotName(searchInput.text)
+        }
     }
 
     override fun showCandidates(results: List<DimCandidate>) {
         candidatesRecyclerView.adapter = SearchAdapter(this, results)
-        hideKeyboard()
     }
 
     private fun hideKeyboard() {
@@ -69,5 +85,6 @@ class SearchActivity : AppCompatActivity(), ISearchView, TabLayout.OnTabSelected
     override fun showProgressBar() {
         candidatesRecyclerView.visibility = View.GONE
         progressBar.visibility = View.VISIBLE
+        hideKeyboard()
     }
 }

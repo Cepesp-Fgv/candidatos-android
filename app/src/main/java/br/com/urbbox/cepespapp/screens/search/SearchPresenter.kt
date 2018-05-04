@@ -14,10 +14,19 @@ class SearchPresenter(view: ISearchView) : BasePresenter<ISearchView>(view) {
         view.hideProgressBar()
     }
 
-    fun onSearch(name: String?, ballotName: String?) {
+    fun onSearchByName(input: String) {
+        onSearch(input, null)
+    }
+
+    fun onSearchByBallotName(input: String) {
+        onSearch(null, input)
+    }
+
+    private fun onSearch(candidateName: String?, ballotName: String?) {
         view.showProgressBar()
+
         launch(CommonPool) {
-            val results = service.searchCandidate(name, ballotName)
+            val results = service.searchCandidate(candidateName, ballotName)
 
             launch(UI) {
                 view.hideProgressBar()
