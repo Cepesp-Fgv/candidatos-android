@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             app:mt_hint="@string/search_input_place_holder"
             app:mt_maxSuggestionsCount="10"
-            app:mt_placeholder="@string/search_input_place_holder"
+            app:mt_placeholder="@string/app_name"
             app:mt_speechMode="false" />
 
         <android.support.design.widget.TabLayout
