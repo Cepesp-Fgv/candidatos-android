@@ -15,6 +15,10 @@ import android.view.inputmethod.InputMethodManager
 import br.com.urbbox.cepespapp.R
 import br.com.urbbox.cepespapp.data.DimCandidate
 import com.mancj.materialsearchbar.MaterialSearchBar
+import com.crashlytics.android.Crashlytics
+import io.fabric.sdk.android.Fabric
+
+
 
 
 class SearchActivity : AppCompatActivity(), ISearchView, TabLayout.OnTabSelectedListener, MaterialSearchBar.OnSearchActionListener {

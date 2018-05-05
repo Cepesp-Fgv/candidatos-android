@@ -9,18 +9,17 @@ import java.lang.reflect.Type
 import java.util.*
 
 fun <T> api(type: Class<T>): T {
-    return Service.retrofit.create(type)
+    return Retrofit.Builder()
+            .baseUrl("http://cepesp-app.herokuapp.com/api/")
+            .addConverterFactory(GsonConverterFactory.create(gson()))
+            .build()
+            .create(type)
 }
 
 fun gson(): Gson {
-    return Service.gson
-}
-
-fun formatDate(date: Date?): String? {
-    return if (date != null)
-        formatDate(date)
-    else
-        null
+    return GsonBuilder()
+            .setDateFormat("yyyy-MM-dd HH:mm:ss")
+            .create()
 }
 
 fun <T> serialize(obj: T): String {
@@ -38,17 +37,4 @@ fun <T> deserialize(data: String, type: Type): T {
 
 fun <T> deserialize(data: String, type: Class<T>): T {
     return gson().fromJson<T>(data, type)
-}
-
-object Service {
-
-    val gson = GsonBuilder()
-            .setDateFormat("yyyy-MM-dd HH:mm:ss")
-            .create()!!
-
-    val retrofit = Retrofit.Builder()
-            .baseUrl("http://cepesp-app.herokuapp.com/api/")
-            .addConverterFactory(GsonConverterFactory.create(gson))
-            .build()!!
-
 }

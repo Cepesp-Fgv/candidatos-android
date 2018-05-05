@@ -4,7 +4,6 @@ import br.com.urbbox.cepespapp.data.Candidate
 import br.com.urbbox.cepespapp.services.deserialize
 import br.com.urbbox.cepespapp.services.serialize
 import br.com.urbbox.cepespapp.utils.BasePresenter
-import com.google.gson.reflect.TypeToken
 
 class CandidateDetailsPresenter(view: ICandidateDetailsView) : BasePresenter<ICandidateDetailsView>(view) {
 
@@ -21,7 +20,7 @@ class CandidateDetailsPresenter(view: ICandidateDetailsView) : BasePresenter<ICa
 
     private fun getCandidateInfo(candidate: Candidate): List<Pair<String, String?>> {
         val serialized = serialize(candidate)
-        val map: Map<String, String?> = deserialize(serialized, object : TypeToken<Map<String, String?>>() {}.type)
+        val map = deserialize(serialized) as Map<String, String?>
 
         return map
                 .filter { it.key !in exclude }
