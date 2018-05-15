@@ -25,7 +25,7 @@
 
         <meta-data
             android:name="io.fabric.ApiKey"
-            android:value="***REMOVED***" />
+            android:value="78676d6950424af317c10b553b899cdce10f90ac" />
     </application>
 
 </manifest>
