@@ -4,5 +4,6 @@
     <string name="search_by_name">Nome Candidato</string>
     <string name="search_by_urn_name">Nome Urna</string>
     <string name="votes"><xliff:g name="votes">%d</xliff:g> de votos</string>
+    <string name="turn"><xliff:g name="votes">%d</xliff:g>º TURNO</string>
     <string name="data_source_footer">Dados do TSE</string>
 </resources>

@@ -4,7 +4,6 @@ import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.GONE
 import android.view.ViewGroup
 import android.widget.TextView
 import br.com.urbbox.cepespapp.R
@@ -30,7 +29,7 @@ class ElectionsAdapter(private val context: Context, private val candidates: Lis
         holder.ballotName?.text = candidate.ballotName
         holder.electionTotal?.text = candidate.totalVotes
         holder.jobDescription?.text = candidate.jobDesc
-        holder.turnSitTotDescription?.text = candidate.roundTotSitDesc
+        holder.turnDescription?.text = context.getString(R.string.turn, candidate.turn.toInt())
         holder.electionYear?.text = candidate.electionYear
 
         if (candidate.totalVotes != null)
@@ -49,7 +48,7 @@ class ElectionsAdapter(private val context: Context, private val candidates: Lis
         val ballotName: TextView? = itemView.ballotNameTextView
         val electionTotal: TextView? = itemView.electionTotalTextView
         val jobDescription: TextView? = itemView.jobDescriptionTextView
-        val turnSitTotDescription: TextView? = itemView.turnSitTotDescriptionTextView
+        val turnDescription: TextView? = itemView.turnDescriptionTextView
         val electionYear: TextView? = itemView.electionYearTextView
     }
 }

@@ -6,8 +6,6 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Candidate(
-        @SerializedName("DATA_GERACAO") val genDate: String,
-        @SerializedName("HORA_GERACAO") val genHour: String,
         @SerializedName("ANO_ELEICAO") val electionYear: String,
         @SerializedName("NUM_TURNO") val turn: String,
         @SerializedName("DESCRICAO_ELEICAO") val electionDesc: String,
@@ -17,7 +15,6 @@ data class Candidate(
         @SerializedName("CODIGO_CARGO") val jobCode: String,
         @SerializedName("DESCRICAO_CARGO") val jobDesc: String,
         @SerializedName("NOME_CANDIDATO") val name: String,
-        @SerializedName("SEQUENCIAL_CANDIDATO") val sequential: String,
         @SerializedName("NUMERO_CANDIDATO") val number: String,
         @SerializedName("CPF_CANDIDATO") val CPF: String,
         @SerializedName("NOME_URNA_CANDIDATO") val ballotName: String,
