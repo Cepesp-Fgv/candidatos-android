@@ -21,7 +21,7 @@ class CepespAppService {
     }
 
     suspend fun getElections(electoralID: String): List<Candidate> {
-        return getList(client.getElections(electoralID.toLong()))
+        return getList(client.getElections(electoralID))
     }
 
     private fun <T> getList(call: Call<ApiResponse<List<T>>>): List<T> {
@@ -47,7 +47,7 @@ class CepespAppService {
 
         @GET("candidatos")
         fun getElections(
-                @Query("NUM_TITULO_ELEITORAL_CANDIDATO") electoralID: Long
+                @Query("NUM_TITULO_ELEITORAL_CANDIDATO") electoralID: String
         ): Call<ApiResponse<List<Candidate>>>
     }
 
