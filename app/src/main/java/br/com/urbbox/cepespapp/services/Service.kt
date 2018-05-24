@@ -20,7 +20,7 @@ fun <T> api(type: Class<T>): T {
             .build()
 
     return Retrofit.Builder()
-            .baseUrl("http://cepesp-app.herokuapp.com/api/")
+            .baseUrl("https://cepesp-app.herokuapp.com/api/")
             .addConverterFactory(GsonConverterFactory.create(gson()))
             .client(httpClient)
             .build()
